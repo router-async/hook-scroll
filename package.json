@@ -1,0 +1,35 @@
+{
+  "name": "hook-scroll",
+  "version": "1.0.0",
+  "description": "Router-async hook scroll",
+  "keywords": [
+    "router-async",
+    "react-router-async",
+    "hook",
+    "scroll"
+  ],
+  "homepage": "https://github.com/router-async",
+  "bugs": {
+    "url": "https://github.com/router-async/hook-scroll/issues",
+    "email": "lamo2k123@gmail.com"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Aleksey Novikov",
+    "email": "lamo2k123@gmail.com"
+  },
+  "contributors": [],
+  "main": "index.js",
+  "repository": "router-async/hook-scroll",
+  "scripts": {
+    "watch": "babel ./src/main.js -w -o ./index.js",
+    "build": "babel ./src/main.js -o ./index.js"
+  },
+  "devDependencies": {
+    "babel-cli": "6.23.0",
+    "babel-plugin-transform-es2015-arrow-functions": "6.22.0",
+    "babel-plugin-transform-es2015-block-scoping": "6.23.0",
+    "babel-plugin-transform-es2015-destructuring": "6.23.0",
+    "babel-plugin-transform-es2015-parameters": "6.23.0"
+  }
+}

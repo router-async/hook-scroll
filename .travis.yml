@@ -1,0 +1,26 @@
+sudo: false
+os:
+  - linux
+  - osx
+
+language: node_js
+node_js:
+  - 5
+  - 6
+  - 7
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+script:
+  - yarn build
+
+deploy:
+  provider: npm
+  email: lamo2k123@gmail.com
+  api_key: $NPM_API_KEY
+  on:
+    tags: true
+    repo: router-async/hook-scroll
