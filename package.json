@@ -1,6 +1,6 @@
 {
   "name": "hook-scroll",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Router-async hook scroll",
   "keywords": [
     "router-async",
@@ -26,7 +26,7 @@
     "build": "babel ./src/main.js -o ./index.js"
   },
   "devDependencies": {
-    "babel-cli": "6.23.0",
+    "babel-cli": "6.24.0",
     "babel-plugin-transform-es2015-arrow-functions": "6.22.0",
     "babel-plugin-transform-es2015-block-scoping": "6.23.0",
     "babel-plugin-transform-es2015-destructuring": "6.23.0",
