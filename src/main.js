@@ -1,6 +1,6 @@
 const storage = [];
 
-module.exports = ({ history, limit = 20 }) => ({
+module.exports = ({ history, reset = true, limit = 20 }) => ({
     start: () => {
         if(history.action === 'PUSH') {
             storage.push([
@@ -18,8 +18,14 @@ module.exports = ({ history, limit = 20 }) => ({
 
         if(history.action === 'POP' && storage.length) {
             position = storage.pop();
+            
+            window.scrollTo(...position);
+        } else {
+            const { location: { state } } = history;
+            
+            if(reset || (state && state.resetScroll)) {
+                window.scrollTo(...position);
+            }
         }
-
-        window.scrollTo(...position);
     }
 });
