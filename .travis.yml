@@ -19,6 +19,7 @@ script:
 
 deploy:
   provider: npm
+  skip_cleanup: true
   email: lamo2k123@gmail.com
   api_key: $NPM_API_KEY
   on:
