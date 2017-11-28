@@ -14,18 +14,22 @@ module.exports = ({ history, reset = true, limit = 20 }) => ({
         }
     },
     render: () => {
+        const { location: { state = {} } } = history;
+        const { resetScroll,  resetOnAction = 'PUSH'} = state;
         let position = [0, 0];
 
-        if(history.action === 'POP' && storage.length) {
-            position = storage.pop();
-            
-            window.scrollTo(...position);
-        } else {
-            const { location: { state } } = history;
-            
-            if(reset || (state && state.resetScroll)) {
+        switch (history.action) {
+            case 'POP':
+                if(storage.length && !(resetScroll && resetOnAction === 'POP')) {
+                    position = storage.pop();
+                }
                 window.scrollTo(...position);
-            }
+                break;
+            case 'PUSH':
+                if(reset || (resetScroll && resetOnAction === 'PUSH')) {
+                    window.scrollTo(...position);
+                }
+                break;
         }
     }
 });
