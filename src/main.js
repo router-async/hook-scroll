@@ -14,7 +14,8 @@ module.exports = ({ history, reset = true, limit = 20 }) => ({
         }
     },
     render: () => {
-        const { location: { state = {} } } = history;
+        const { location } = history;
+        const state = location.state || {};
         const { resetScroll,  resetOnAction = 'PUSH'} = state;
         let position = [0, 0];
 
