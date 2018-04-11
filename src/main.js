@@ -1,20 +1,22 @@
 const storage = [];
 
 module.exports = ({ history, elementId, reset = true, limit = 20 }) => ({
+    const $el = elementId ? document.getElementById(elementId) : window;
+    
     start: () => {
         if(history.action === 'PUSH') {
-            if(elementId) {
-                const element = document.getElementById(elementId);
-                element && storage.push([
-                    element.scrollLeft,
-                    element.scrollTop
-                ]);
-            }
-            else {
-                storage.push([
-                    window.scrollX,
-                    window.scrollY
-                ]);
+            if($el) {
+                if(elementId) {
+                    storage.push([
+                        $el.scrollLeft,
+                        $el.scrollTop
+                    ]);
+                } else {
+                    storage.push([
+                        $el.scrollX,
+                        $el.scrollY
+                    ]);
+                }
             }
 
             if(storage.length > limit) {
@@ -33,24 +35,15 @@ module.exports = ({ history, elementId, reset = true, limit = 20 }) => ({
                 if(storage.length && !(resetScroll && resetOnAction === 'POP')) {
                     position = storage.pop();
                 }
-                if(elementId) {
-                    const element = document.getElementById(elementId);
-                    element && element.scrollTo(...position);
-                }
-                else {
-                    window.scrollTo(...position);
-                }
+                
+                $el && $el.scrollTo(...position);
+                
                 break;
             case 'PUSH':
                 if(reset || (resetScroll && resetOnAction === 'PUSH')) {
-                    if(elementId) {
-                        const element = document.getElementById(elementId);
-                        element && element.scrollTo(...position);
-                    }
-                    else {
-                        window.scrollTo(...position);
-                    }
+                    $el && $el.scrollTo(...position);
                 }
+                
                 break;
         }
     }
