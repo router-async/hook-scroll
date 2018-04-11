@@ -1,12 +1,21 @@
 const storage = [];
 
-module.exports = ({ history, reset = true, limit = 20 }) => ({
+module.exports = ({ history, elementId, reset = true, limit = 20 }) => ({
     start: () => {
         if(history.action === 'PUSH') {
-            storage.push([
-                window.scrollX,
-                window.scrollY
-            ]);
+            if(elementId) {
+                const element = document.getElementById(elementId);
+                element && storage.push([
+                    element.scrollLeft,
+                    element.scrollTop
+                ]);
+            }
+            else {
+                storage.push([
+                    window.scrollX,
+                    window.scrollY
+                ]);
+            }
 
             if(storage.length > limit) {
                 delete storage.shift();
@@ -24,11 +33,23 @@ module.exports = ({ history, reset = true, limit = 20 }) => ({
                 if(storage.length && !(resetScroll && resetOnAction === 'POP')) {
                     position = storage.pop();
                 }
-                window.scrollTo(...position);
+                if(elementId) {
+                    const element = document.getElementById(elementId);
+                    element && element.scrollTo(...position);
+                }
+                else {
+                    window.scrollTo(...position);
+                }
                 break;
             case 'PUSH':
                 if(reset || (resetScroll && resetOnAction === 'PUSH')) {
-                    window.scrollTo(...position);
+                    if(elementId) {
+                        const element = document.getElementById(elementId);
+                        element && element.scrollTo(...position);
+                    }
+                    else {
+                        window.scrollTo(...position);
+                    }
                 }
                 break;
         }
