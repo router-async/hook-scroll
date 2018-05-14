@@ -26,26 +26,28 @@ module.exports = ({ history, elementId, reset = true, limit = 20 }) => {
             }
         },
         render: () => {
-            const { location } = history;
-            const state = location.state || {};
-            const { resetScroll,  resetOnAction = 'PUSH'} = state;
-            let position = [0, 0];
+            if(ctx.get('scroll') !== false) {
+                const { location } = history;
+                const state = location.state || {};
+                const { resetScroll,  resetOnAction = 'PUSH'} = state;
+                let position = [0, 0];
 
-            switch (history.action) {
-                case 'POP':
-                    if(storage.length && !(resetScroll && resetOnAction === 'POP')) {
-                        position = storage.pop();
-                    }
+                switch (history.action) {
+                    case 'POP':
+                        if(storage.length && !(resetScroll && resetOnAction === 'POP')) {
+                            position = storage.pop();
+                        }
 
-                    $el && $el.scrollTo(...position);
-
-                    break;
-                case 'PUSH':
-                    if(reset || (resetScroll && resetOnAction === 'PUSH')) {
                         $el && $el.scrollTo(...position);
-                    }
 
-                    break;
+                        break;
+                    case 'PUSH':
+                        if(reset || (resetScroll && resetOnAction === 'PUSH')) {
+                            $el && $el.scrollTo(...position);
+                        }
+
+                        break;
+                }
             }
         }
     };
