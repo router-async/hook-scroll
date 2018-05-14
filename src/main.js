@@ -25,7 +25,7 @@ module.exports = ({ history, elementId, reset = true, limit = 20 }) => {
                 }
             }
         },
-        render: () => {
+        render: ({ ctx }) => {
             if(ctx.get('scroll') !== false) {
                 const { location } = history;
                 const state = location.state || {};
