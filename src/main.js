@@ -38,12 +38,16 @@ module.exports = ({ history, elementId, reset = true, limit = 20 }) => {
                             position = storage.pop();
                         }
 
-                        $el && $el.scrollTo(...position);
+                        if($el && $el.scrollTo) {
+                            $el.scrollTo(...position);
+                        }
 
                         break;
                     case 'PUSH':
                         if(reset || (resetScroll && resetOnAction === 'PUSH')) {
-                            $el && $el.scrollTo(...position);
+                            if($el && $el.scrollTo) {
+                                $el.scrollTo(...position);
+                            }
                         }
 
                         break;
