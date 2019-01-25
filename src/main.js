@@ -1,5 +1,16 @@
 const storage = [];
 
+const scrollTo = ($el, top, left) => {
+    if($el) {
+        if($el.scrollTo) {
+            $el.scrollTo(top, left);
+        } else {
+            $el.scrollTop = top;
+            $el.scrollLeft = left;
+        }
+    }
+};
+
 module.exports = ({ history, elementId, reset = true, limit = 20 }) => {
     const $el = elementId ? document.getElementById(elementId) : window;
     
@@ -38,16 +49,12 @@ module.exports = ({ history, elementId, reset = true, limit = 20 }) => {
                             position = storage.pop();
                         }
 
-                        if($el && $el.scrollTo) {
-                            $el.scrollTo(...position);
-                        }
+                        scrollTo($el, ...position);
 
                         break;
                     case 'PUSH':
                         if(reset || (resetScroll && resetOnAction === 'PUSH')) {
-                            if($el && $el.scrollTo) {
-                                $el.scrollTo(...position);
-                            }
+                            scrollTo($el, ...position);
                         }
 
                         break;
