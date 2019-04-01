@@ -1,4 +1,5 @@
 const storage = [];
+const prevPathname = document.location.pathname; 
 
 const scrollTo = ($el, top, left) => {
     if($el) {
@@ -41,7 +42,9 @@ module.exports = ({ history, elementId, reset = true, limit = 20 }) => {
                 const { location } = history;
                 const state = location.state || {};
                 const { resetScroll,  resetOnAction = 'PUSH'} = state;
-                let position = [0, 0];
+                if (window.location.pathname !== prevPathname) {
+                    let position = [0, 0];
+                }
 
                 switch (history.action) {
                     case 'POP':
@@ -59,6 +62,7 @@ module.exports = ({ history, elementId, reset = true, limit = 20 }) => {
 
                         break;
                 }
+                prevPathname = location.pathname;
             }
         }
     };
